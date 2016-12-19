@@ -1,0 +1,26 @@
+#container{
+	width: 100%;
+	height:627px;
+	background: url("../img/bg-img.jpg");
+	background-repeat: no-repeat;
+	background-size: cover; 
+	color: #fff;
+}
+.mealBoard{
+	text-align: center;
+	font-size: 2em;
+}
+.mealBody{
+	margin:0 40%;
+}
+.mealPrice{
+	padding-left: 20px;
+}
+.btn-primary{
+	background: green;
+	border: 2px solid green;
+}
+.btn-danger{
+	background: red;
+	border: 2px solid red;
+}

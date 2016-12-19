@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React - Template</title>
+    
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/react.min.js"></script>
+    <script src="js/react-dom.min.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+
+    <div id="container"></div>
+
+    <script type="text/babel">
+        var BudgetElement = React.createClass({
+            getInitialState: function(){
+                return{edit: false}
+            },
+            edit: function(){
+                this.setState({edit: true});
+            },
+            delete: function(){
+                console.log('I just created a delete button! Awesome! ');
+                this.props.deleteTab(this.props.index);
+            },
+            save: function(){
+                this.props.updateTab(this.refs.inputText.value,this.props.index);
+                this.setState({edit: false});
+            },
+
+            renderNormal: function(){
+                var msg;
+                if(this.state.checked){
+                    msg = 'checked'
+                }else{
+                    msg= 'unchecked'
+                }
+                return(<div>
+                    <span>{this.props.children}</span>
+                    <button className="btn btn-default" onClick={this.edit}>Edit</button>
+                    <button className="btn btn-danger" onClick={this.delete}>Delete</button>
+                </div>);
+            },
+
+            renderEditForm: function(){
+                return(<div>
+                    <span>{this.props.children}</span>
+                    <textarea ref="inputText" defaultValue={this.props.children}></textarea>
+                    <button className="btn btn-default" onClick={this.save}>Save</button>
+                </div>);
+            },
+            render: function(){
+                if(this.state.edit){
+                   return this.renderEditForm();
+                }else{
+                    return this.renderNormal();
+                }
+            }
+        });
+
+        var BudgetTab = React.createClass({
+            getInitialState: function(){
+                return{
+                    elements: []
+                }
+            },
+            
+            eachComment: function(title, i){
+                return(<BudgetElement key={i} index={i} updateTab={this.updateTask} deleteTab={this.removeTask}>{title}</BudgetElement>);
+            },
+
+            addTask: function(text){
+                var tempElement = this.state.elements;
+                tempElement.push(text);
+                this.setState({elements: tempElement});
+            },
+
+            removeTask: function(i){
+                console.log('Removed: '+ i);
+                var tempElement = this.state.elements;
+                tempElement.splice(i,1);
+                this.setState({elements: tempElement});
+            },
+
+            updateTask: function(text, i){
+                console.log('Updated text: ' + text);
+                var tempElement = this.state.elements;
+                tempElement[i]  = text;
+                this.setState({elements: tempElement});
+            },
+
+            render: function(){
+               return(
+                   <div>
+                       <button className="btn btn-default" onClick={this.addTask.bind(null, 'New Task Name')}><i className="fa fa-plus"></i> Add New Task</button>
+                        <div>
+                            {this.state.elements.map(this.eachComment)}
+                        </div>
+                   </div>
+               )
+            }
+        });
+
+        ReactDOM.render(<BudgetTab/>, document.getElementById('container'));
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+.btn-default{
+	background-color:#23adb1;
+    color: #fff;
+    border: #23adb1;
+    outline: 0 !important;
+    width: 12em;
+    height: 3.5em;
+    box-shadow: 0 3px 10px #1a1a1a,0 3px 10px #1a1a1a;
+    text-transform: uppercase;
+    font-weight: bolder;
+    margin-left: 29px;
+     transition: box-shadow 2s ease;
+    -webkit-transition: box-shadow 2s ease;
+    -o-transition: box-shadow 2s ease;
+    -moz-transition: box-shadow 2s ease;
+}
+.btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover{
+    background: #23adb1;
+    box-shadow: none;
+    color: #fff;
+}
